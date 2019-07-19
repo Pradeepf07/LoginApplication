@@ -37,28 +37,40 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(name.getText().toString().equals("")){
-
+                    Toast.makeText(SignupActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
                 }
                 else if (dob.getText().toString().equals(""))
                 {
-
+                    Toast.makeText(SignupActivity.this, "Please enter your Birth Year", Toast.LENGTH_SHORT).show();
                 }
                 else if(gender.getSelectedItem().toString().equals("Please select Gender"))
                 {
-
+                    Toast.makeText(SignupActivity.this, "Please select your gender", Toast.LENGTH_SHORT).show();
                 }
                 else if(emailaddress.getText().toString().equals(""))
                 {
-
+                    Toast.makeText(SignupActivity.this, "Please enter your email address", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
 
-                    editor.putString("loginhint", "true");
+                    editor.putString("name",name.getText().toString());
+                    editor.putString("ybirth",dob.getText().toString());
+                    editor.putString("gender",gender.getSelectedItem().toString());
+                    editor.putString("email",emailaddress.getText().toString());
+
+                    String username  = name.getText().toString().substring(0,1)+dob.getText().toString();
+                    String pass = dob.getText().toString();
+
+                    Toast.makeText(SignupActivity.this,"Username : "+username+"\nPassword : "+pass,Toast.LENGTH_LONG).show();
+                    editor.putString("username",username);
+                    editor.putString("password",pass);
+
+
                     editor.commit();
 
-                    startActivity(new Intent(SignupActivity.this,MainActivity.class));
+                    startActivity(new Intent(SignupActivity.this,LoginActivity.class));
                 }
             }
         });

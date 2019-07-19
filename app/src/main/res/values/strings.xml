@@ -4,6 +4,7 @@
 
 
     <string-array name="gender">
+        <item>Please select Gender</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
